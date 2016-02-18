@@ -43,8 +43,8 @@ trait DAOConventions[T<:{ def id: UUID }] { // scalastyle:ignore structural.type
   }
 
   def destroyById(id: UUID): Future[Int] = {
-    val query = table.filter(_.id === id).map(_.deleted).update(true)
-    db.run(query)
+    val query = table.filter(_.id === id)
+    db.run(query.delete)
   }
 
 }
